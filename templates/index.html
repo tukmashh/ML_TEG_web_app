@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+    <title>TEG ML Predictor</title>
+</head>
+<body>
+    <h2>Введите параметры</h2>
+    <form method="post">
+        <label>eta_F_n: <input type="text" name="eta_F_n"></label><br>
+        <label>eta_F_p: <input type="text" name="eta_F_p"></label><br>
+        <label>h: <input type="text" name="h"></label><br>
+        <label>R: <input type="text" name="R"></label><br>
+        <label>T_h: <input type="text" name="T_h"></label><br>
+        <input type="submit" value="Предсказать">
+    </form>
+
+    {% if prediction %}
+        <h3>Результат: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>
