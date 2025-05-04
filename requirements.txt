@@ -2,3 +2,6 @@ Flask
 tensorflow
 scikit-learn
 gunicorn
+pandas
+numpy
+joblib
