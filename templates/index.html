@@ -1,21 +1,152 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <title>TEG ML Predictor</title>
+    <meta charset="UTF-8">
+    <title>TEG Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://i.imgur.com/LlTn4Rf.png') repeat; /* пастельный фон с текстурой */
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            margin: 60px auto 120px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            color: #4e2a84;
+            margin-bottom: 20px;
+        }
+
+        .neon {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #fff;
+            text-shadow:
+              0 0 5px #fff,
+              0 0 10px #ff8de8,
+              0 0 20px #d97bd7,
+              0 0 30px #b870d1;
+            animation: flicker 2s infinite alternate;
+            margin-top: -40px;
+            margin-bottom: 40px;
+        }
+
+        @keyframes flicker {
+            0%   { opacity: 1; }
+            50%  { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #5a3b84;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #d9c2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fdf9ff;
+        }
+
+        input[type="submit"] {
+            padding: 12px;
+            background-color: #cba0e3;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ae7cd1;
+        }
+
+        .result {
+            margin-top: 25px;
+            background-color: #f3eaff;
+            border-left: 4px solid #ae7cd1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #4b3869;
+        }
+
+        .error {
+            margin-top: 25px;
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        /* Анимированный котик */
+        .cat {
+            position: fixed;
+            bottom: 0;
+            left: -150px;
+            width: 100px;
+            z-index: 1000;
+            animation: walk 20s linear infinite;
+        }
+
+        @keyframes walk {
+            0% { left: -150px; }
+            100% { left: 100%; }
+        }
+    </style>
 </head>
 <body>
-    <h2>Введите параметры</h2>
-    <form method="post">
-        <label>eta_F_n: <input type="text" name="eta_F_n"></label><br>
-        <label>eta_F_p: <input type="text" name="eta_F_p"></label><br>
-        <label>h: <input type="text" name="h"></label><br>
-        <label>R: <input type="text" name="R"></label><br>
-        <label>T_h: <input type="text" name="T_h"></label><br>
-        <input type="submit" value="Предсказать">
-    </form>
 
-    {% if prediction %}
-        <h3>Результат: {{ prediction }}</h3>
-    {% endif %}
+    <div class="container">
+        <h2>Прогноз параметров TEG</h2>
+        <div class="neon">инди-интернет ✨ tumblr vibes</div>
+
+        <form method="post">
+            {% for name in input_values %}
+                <div>
+                    <label for="{{ name }}">{{ name }}</label>
+                    <input type="text" name="{{ name }}" value="{{ input_values[name] }}">
+                </div>
+            {% endfor %}
+            <input type="submit" value="💫 Рассчитать 💫">
+        </form>
+
+        {% if prediction %}
+            {% if prediction is string %}
+                <div class="error">{{ prediction }}</div>
+            {% else %}
+                <div class="result">
+                    {% for p in prediction %}
+                        {{ p }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <img class="cat" src="https://i.imgur.com/q3g1Myd.gif" alt="Walking Cat">
 </body>
 </html>
