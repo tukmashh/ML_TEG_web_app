@@ -1,152 +1,167 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>TEG Predictor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: url('https://i.imgur.com/LlTn4Rf.png') repeat; /* пастельный фон с текстурой */
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8">
+  <title>TEG Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Press Start 2P', cursive;
+      color: #fff;
+      background: 
+        url('https://i.imgur.com/DEjYBYd.png') repeat,
+        linear-gradient(135deg, #ff8edb, #6e00ff);
+      background-blend-mode: overlay;
+      image-rendering: pixelated;
+      overflow-x: hidden;
+    }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            margin: 60px auto 120px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-        }
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      margin: 60px auto 100px;
+      border: 4px double #ff9df7;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 20px #ff95eb;
+    }
 
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 30px;
-            color: #4e2a84;
-            margin-bottom: 20px;
-        }
+    h2 {
+      font-size: 18px;
+      color: #ffd6ff;
+      margin-bottom: 20px;
+    }
 
-        .neon {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: #fff;
-            text-shadow:
-              0 0 5px #fff,
-              0 0 10px #ff8de8,
-              0 0 20px #d97bd7,
-              0 0 30px #b870d1;
-            animation: flicker 2s infinite alternate;
-            margin-top: -40px;
-            margin-bottom: 40px;
-        }
+    .neon {
+      font-size: 12px;
+      color: #fff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #ff00cc,
+        0 0 20px #8e2de2;
+      animation: flicker 2s infinite alternate;
+      margin-top: -20px;
+      margin-bottom: 40px;
+    }
 
-        @keyframes flicker {
-            0%   { opacity: 1; }
-            50%  { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-        label {
-            font-weight: bold;
-            color: #5a3b84;
-            text-align: left;
-        }
+    label {
+      text-align: left;
+      font-size: 10px;
+      color: #d2aaff;
+    }
 
-        input[type="text"] {
-            padding: 10px;
-            border: 1px solid #d9c2e6;
-            border-radius: 8px;
-            font-size: 14px;
-            background-color: #fdf9ff;
-        }
+    input[type="text"] {
+      padding: 10px;
+      font-family: inherit;
+      font-size: 10px;
+      background-color: #190022;
+      border: 2px solid #ae7cd1;
+      color: #fff;
+      border-radius: 6px;
+    }
 
-        input[type="submit"] {
-            padding: 12px;
-            background-color: #cba0e3;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    input[type="submit"] {
+      padding: 12px;
+      background-color: #ff47c2;
+      color: white;
+      font-size: 12px;
+      font-family: inherit;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
 
-        input[type="submit"]:hover {
-            background-color: #ae7cd1;
-        }
+    input[type="submit"]:hover {
+      background-color: #d536a7;
+    }
 
-        .result {
-            margin-top: 25px;
-            background-color: #f3eaff;
-            border-left: 4px solid #ae7cd1;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            color: #4b3869;
-        }
+    .result {
+      margin-top: 25px;
+      background-color: #1d0030;
+      border-left: 4px solid #ae7cd1;
+      padding: 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #e0d2ff;
+      font-size: 10px;
+      text-align: left;
+    }
 
-        .error {
-            margin-top: 25px;
-            color: #c0392b;
-            font-weight: bold;
-        }
+    .error {
+      margin-top: 25px;
+      color: #ffaaaa;
+      font-weight: bold;
+      font-size: 10px;
+    }
 
-        /* Анимированный котик */
-        .cat {
-            position: fixed;
-            bottom: 0;
-            left: -150px;
-            width: 100px;
-            z-index: 1000;
-            animation: walk 20s linear infinite;
-        }
+    .cat {
+      position: fixed;
+      bottom: 0;
+      left: -150px;
+      width: 80px;
+      image-rendering: pixelated;
+      z-index: 999;
+      animation: walk 20s linear infinite;
+    }
 
-        @keyframes walk {
-            0% { left: -150px; }
-            100% { left: 100%; }
-        }
-    </style>
+    @keyframes walk {
+      0% { left: -150px; }
+      100% { left: 100%; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>Прогноз параметров TEG</h2>
-        <div class="neon">инди-интернет ✨ tumblr vibes</div>
+  <div class="container">
+    <h2>TEG Parameter Prediction</h2>
+    <div class="neon">✨ Vaporwave pixel vibes ✨</div>
 
-        <form method="post">
-            {% for name in input_values %}
-                <div>
-                    <label for="{{ name }}">{{ name }}</label>
-                    <input type="text" name="{{ name }}" value="{{ input_values[name] }}">
-                </div>
-            {% endfor %}
-            <input type="submit" value="💫 Рассчитать 💫">
-        </form>
+    <form method="post">
+      {% for name in input_values %}
+        <div>
+          <label for="{{ name }}">{{ name }}</label>
+          <input type="text" name="{{ name }}" value="{{ input_values[name] }}">
+        </div>
+      {% endfor %}
+      <input type="submit" value="💫 Predict 💫">
+    </form>
 
-        {% if prediction %}
-            {% if prediction is string %}
-                <div class="error">{{ prediction }}</div>
-            {% else %}
-                <div class="result">
-                    {% for p in prediction %}
-                        {{ p }}<br>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endif %}
-    </div>
+    {% if prediction %}
+      {% if prediction is string %}
+        <div class="error">{{ prediction }}</div>
+      {% else %}
+        <div class="result">
+          single thermocouple power, W: {{ prediction[0] }}<br>
+          efficiency, %: {{ prediction[1] }}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
 
-    <img class="cat" src="https://i.imgur.com/q3g1Myd.gif" alt="Walking Cat">
+  <img class="cat" src="https://i.imgur.com/bRzX2VW.gif" alt="Walking Cat">
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/17/audio_7a337f12e5.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
 </body>
 </html>
