@@ -10,11 +10,8 @@
       padding: 0;
       font-family: 'Press Start 2P', cursive;
       color: #fff;
-      background: 
-        url('https://i.imgur.com/DEjYBYd.png') repeat,
-        linear-gradient(135deg, #ff8edb, #6e00ff);
+      background: linear-gradient(135deg, #ff8edb, #6e00ff);
       background-blend-mode: overlay;
-      image-rendering: pixelated;
       overflow-x: hidden;
     }
 
@@ -75,11 +72,10 @@
       background-color: #d536a7;
     }
 
-    .results-heading {
-      margin-top: 40px;
+    .result-header {
       font-size: 12px;
-      color: #ffb3ec;
-      text-shadow: 0 0 5px #ff80d5;
+      margin-top: 25px;
+      color: #ffd6ff;
     }
 
     .result {
@@ -92,6 +88,7 @@
       color: #e0d2ff;
       font-size: 10px;
       text-align: left;
+      white-space: pre-line;
     }
 
     .error {
@@ -136,10 +133,11 @@
       {% if prediction is string %}
         <div class="error">{{ prediction }}</div>
       {% else %}
-        <div class="results-heading">Results:</div>
+        <div class="result-header">RESULTS</div>
         <div class="result">
-          SINGLE THERMOCOUPLE POWER, W: {{ prediction[0] }}<br><br>
-          EFFICIENCY, %: {{ prediction[1] }}
+SINGLE THERMOCOUPLE POWER: {{ prediction[0] }}
+
+EFFICIENCY: {{ prediction[1] }}
         </div>
       {% endif %}
     {% endif %}
