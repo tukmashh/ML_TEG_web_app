@@ -143,8 +143,10 @@ EFFICIENCY: {{ prediction[1] }}
     {% endif %}
   </div>
 
-  <img class="cat" src="https://i.imgur.com/bRzX2VW.gif" alt="Walking Cat">
+  <!-- Котик из локального файла -->
+  <img class="cat" src="{{ url_for('static', filename='pixel-art-12601_512.gif') }}" alt="Walking Cat">
 
+  <!-- Фоновая музыка -->
   <audio autoplay loop>
     <source src="{{ url_for('static', filename='password_infinity.mp3') }}" type="audio/mpeg">
     Your browser does not support the audio element.
