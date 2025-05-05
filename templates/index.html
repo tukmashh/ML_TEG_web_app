@@ -36,24 +36,6 @@
       margin-bottom: 20px;
     }
 
-    .neon {
-      font-size: 12px;
-      color: #fff;
-      text-shadow:
-        0 0 5px #fff,
-        0 0 10px #ff00cc,
-        0 0 20px #8e2de2;
-      animation: flicker 2s infinite alternate;
-      margin-top: -20px;
-      margin-bottom: 40px;
-    }
-
-    @keyframes flicker {
-      0% { opacity: 1; }
-      50% { opacity: 0.7; }
-      100% { opacity: 1; }
-    }
-
     form {
       display: flex;
       flex-direction: column;
@@ -93,8 +75,15 @@
       background-color: #d536a7;
     }
 
+    .results-heading {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #ffb3ec;
+      text-shadow: 0 0 5px #ff80d5;
+    }
+
     .result {
-      margin-top: 25px;
+      margin-top: 10px;
       background-color: #1d0030;
       border-left: 4px solid #ae7cd1;
       padding: 16px;
@@ -132,7 +121,6 @@
 
   <div class="container">
     <h2>TEG Parameter Prediction</h2>
-    <div class="neon">✨ Vaporwave pixel vibes ✨</div>
 
     <form method="post">
       {% for name in input_values %}
@@ -148,9 +136,10 @@
       {% if prediction is string %}
         <div class="error">{{ prediction }}</div>
       {% else %}
+        <div class="results-heading">Results:</div>
         <div class="result">
-          single thermocouple power, W: {{ prediction[0] }}<br>
-          efficiency, %: {{ prediction[1] }}
+          SINGLE THERMOCOUPLE POWER, W: {{ prediction[0] }}<br><br>
+          EFFICIENCY, %: {{ prediction[1] }}
         </div>
       {% endif %}
     {% endif %}
@@ -159,7 +148,7 @@
   <img class="cat" src="https://i.imgur.com/bRzX2VW.gif" alt="Walking Cat">
 
   <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/audio/2022/10/17/audio_7a337f12e5.mp3" type="audio/mpeg">
+    <source src="{{ url_for('static', filename='password_infinity.mp3') }}" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
