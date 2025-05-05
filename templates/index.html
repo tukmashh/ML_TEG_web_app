@@ -132,11 +132,11 @@
       100% { left: 100%; }
     }
 
-    .corner-cat {
+    .corner-character {
       position: fixed;
       top: 0;
       right: 0;
-      width: calc(512px * 5);
+      width: 150px;
       image-rendering: pixelated;
       z-index: 998;
     }
@@ -145,27 +145,27 @@
       position: fixed;
       top: 80px;
       left: 20px;
-      width: auto;
-      max-width: 300px;
-      z-index: 999;
+      width: 280px;
       image-rendering: pixelated;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
 
-  <!-- Кнопка воспроизведения музыки -->
-  <button class="music-button" onclick="document.getElementById('bg-music').play()">▶ Play Music</button>
+  <!-- Кнопка управления музыкой -->
+  <button class="music-button" onclick="toggleMusic()">▶ Play Music</button>
 
   <!-- Pixel Jeff GIF -->
   <img class="pixel-jeff" src="{{ url_for('static', filename='Pixel Art 8Bit GIF by pixel jeff.gif') }}" alt="Pixel Jeff GIF">
 
-  <!-- Кошка, бегущая снизу -->
+  <!-- Анимация движущейся кошки -->
   <img class="cat" src="{{ url_for('static', filename='cat-8915_256.gif') }}" alt="Walking Cat">
 
-  <!-- Кошка в правом верхнем углу -->
-  <img class="corner-cat" src="{{ url_for('static', filename='pixel-art-12601_512.gif') }}" alt="Corner Cat">
+  <!-- Человечек в правом верхнем углу -->
+  <img class="corner-character" src="{{ url_for('static', filename='pixel-art-12601_512.gif') }}" alt="Pixel Person">
 
+  <!-- Контейнер с формой -->
   <div class="container">
     <h2>TEG Parameter Prediction</h2>
 
@@ -193,11 +193,29 @@ EFFICIENCY: {{ prediction[1] }}
     {% endif %}
   </div>
 
-  <!-- Музыка -->
+  <!-- Аудио -->
   <audio id="bg-music" loop>
     <source src="{{ url_for('static', filename='password-infinity-123276.mp3') }}" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+
+  <!-- Скрипт управления музыкой -->
+  <script>
+    const audio = document.getElementById('bg-music');
+    const button = document.querySelector('.music-button');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        button.textContent = '▶ Play Music';
+      } else {
+        audio.play();
+        button.textContent = '⏸ Pause Music';
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
 
 </body>
 </html>
