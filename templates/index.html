@@ -112,6 +112,35 @@
       0% { left: -150px; }
       100% { left: 100%; }
     }
+
+    .music-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #ff47c2;
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 12px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 0 10px #ff95eb;
+      transition: background-color 0.3s ease;
+    }
+
+    .music-button:hover {
+      background-color: #d536a7;
+    }
+
+    .static-image {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 153px; /* 3x увеличенная картинка */
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
@@ -135,22 +164,34 @@
       {% else %}
         <div class="result-header">RESULTS</div>
         <div class="result">
-SINGLE THERMOCOUPLE POWER: {{ prediction[0] }}
-
-EFFICIENCY: {{ prediction[1] }}
+          SINGLE THERMOCOUPLE POWER: {{ prediction[0] }}<br><br>
+          EFFICIENCY: {{ prediction[1] }}
         </div>
       {% endif %}
     {% endif %}
   </div>
 
-  <!-- Котик из локального файла -->
-  <img class="cat" src="{{ url_for('static', filename='pixel-art-12601_512.gif') }}" alt="Walking Cat">
+  <!-- Картинка кота, движущегося по экрану -->
+  <img class="cat" src="{{ url_for('static', filename='cat-8915_256.gif') }}" alt="Walking Cat">
 
-  <!-- Фоновая музыка -->
-  <audio autoplay loop>
+  <!-- Картинка в правом верхнем углу -->
+  <img class="static-image" src="{{ url_for('static', filename='pixel-art-12601_512.gif') }}" alt="Pixel Art">
+
+  <!-- Кнопка для запуска музыки -->
+  <button class="music-button" onclick="playMusic()">▶ Play Music</button>
+
+  <!-- Аудио элемент -->
+  <audio id="bg-music" loop>
     <source src="{{ url_for('static', filename='password_infinity.mp3') }}" type="audio/mpeg">
-    Your browser does not support the audio element.
+    Ваш браузер не поддерживает элемент аудио.
   </audio>
+
+  <script>
+    function playMusic() {
+      const audio = document.getElementById('bg-music');
+      audio.play();
+    }
+  </script>
 
 </body>
 </html>
